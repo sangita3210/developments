@@ -25,6 +25,7 @@ $CFG->admin     = 'admin';
 $CFG->directorypermissions = 0777;
 
 require_once(__DIR__ . '/lib/setup.php');
+echo 'hello';
 
 // There is no php closing tag in this file,
 // it is intentional because it prevents trailing whitespace problems!
