@@ -59,6 +59,7 @@ if(is_siteadmin()){
             );
         echo '<br><br>';
     }
+    //new changes can be done while testing time
     if($organizations){
         $table = new html_table();
         $table->head = (array) get_strings(array('name', 'sname','email', 'address', 'phone'), 'local_accesscohort');

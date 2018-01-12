@@ -92,6 +92,7 @@ class accesscohort_candidate_selector extends user_selector_base {
             $r2 = $DB->get_records_sql($sql1);
             //check cohortids prasent in organization mapping table 
             //echo $this->cohortid;
+             //new query is added here on jan 11
             $sql2 = "SELECT org_id from {local_mapping_cohort} where cohort_id like '%$this->cohortid%'";
             $results = $DB->get_records_sql($sql2);
             //new code here for matching value here
@@ -200,7 +201,8 @@ class accesscohort_existing_selector extends user_selector_base {
          where oa.userid = $USER->id";
             //depending upon capability we need to give data here 
          $r2 = $DB->get_records_sql($sql1);
-            //check cohortids prasent in organization mapping table 
+            //check cohortids prasent in organization mapping table
+        //new query is added here on jan 11 
          $sql2 = "SELECT org_id from {local_mapping_cohort} where cohort_id like '%$this->cohortid%'";
          $results = $DB->get_records_sql($sql2);
             //new code here for matching value here
