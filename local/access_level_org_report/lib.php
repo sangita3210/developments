@@ -52,7 +52,7 @@ function local_access_level_org_report_extend_navigation(global_navigation $nav)
  * @return array status,percentage,completionfdate
  */
 
-function user_progress_course_report($courseid,$user){
+/*function user_progress_course_report($courseid,$user){
 	global $CFG,$DB,$USER;
 	if(is_null($user)){
 		$user = $USER;
@@ -66,9 +66,7 @@ function user_progress_course_report($courseid,$user){
 		$percentage = progress::get_course_progress_percentage($course);
 		if (!is_null($percentage)) {
 			$percentage = floor($percentage);
-			//print_object($percentage);
 		}
-
 		$coursesprogress[$course->id]['completed'] = $completion->is_course_complete($user);
 		$coursesprogress[$course->id]['progress'] = $percentage;
 		$params = array(
@@ -76,31 +74,91 @@ function user_progress_course_report($courseid,$user){
 			'course'  => $course->id
 			);
 		$ccompletion = new completion_completion($params);
-		//print_object($ccompletion);
+		//print_object($completion);
 		$completiondate = '-';
 
-		if ($coursesprogress[$course->id]['completed'] == false) {
-			if ($coursesprogress[$course->id]['progress'] >  0 && $coursesprogress[$course->id]['progress'] < 100) {
-				$status = '-';
-			} 
-			else {
-				$status = get_string('ns','local_access_level_org_report');
-			}
-
-		} else {
-			$status =get_string('cm','local_access_level_org_report'); 
-			$completiondate = userdate($ccompletion->timecompleted, $dateformat);
-		} 
 		$studentid = $user;
 		$grades = grade_get_course_grades($courseid, $studentid);
-		//print_object($grades);
 		$grademax = $grades->grademax;
-		$grade1 = (int) $grades->grades[$studentid]->str_grade;
-		//print_object($grades);
+		$grade2 = (int) $grades->grades[$studentid]->str_grade;
+		$grade1 = $grade2 * 10;
+		print_object($coursesprogress[$course->id]['completed'] );
+		if ($coursesprogress[$course->id]['completed'] == false) {
+			print_object('no');
+			if($grade1 >  0 && $grade1 < 100 ){
+				$status = '-';
+			}
+			else{
+				if($grade1 == 0){
+					$status = get_string('ns','local_access_level_org_report');
+				}
+			}
+		} else {
+			print_object('sdfghno');
+			if($grade1 == 100){
+				$status =get_string('cm','local_access_level_org_report'); 
+				$completiondate = userdate($ccompletion->timecompleted, $dateformat);
+			}
+		} 
 	}	
 	$grade = array(
 		'status'=>$status,
 		'percentage' => $grade1 ,
+		'completiondate' =>$completiondate
+		);
+	return $grade;
+}*/
+
+//old code here 
+function user_progress_course_report($courseid,$newuserid){
+	global $CFG,$DB,$USER;
+	if(is_null($newuserid)){
+		$user = $USER;
+		return NULL;
+	}else{
+		$userobj = $DB->get_record('user',array('id'=>$newuserid));
+	}
+	$dateformat = '%d-%b-%Y';
+	$graade = [];
+	$coursesprogress = [];
+	$course = $DB->get_record('course',array('id'=>$courseid));
+	if($course){
+		$completion = new \completion_info($course);
+		$percentage = progress::get_course_progress_percentage($course,$userobj->id);
+		if (!is_null($percentage)) {
+			$percentage = floor($percentage);
+		}
+		$params = array(
+			'userid'    => $userobj->id,
+			'course'  => $course->id
+			);
+		$ccompletion = new completion_completion($params);
+
+		$coursesprogress[$course->id]['completed'] = 
+		$completion->is_course_complete($userobj->id);
+		$coursesprogress[$course->id]['progress'] = $percentage;
+		$completiondate = '';
+		if ($coursesprogress[$course->id]['completed'] == false) {
+			if ($coursesprogress[$course->id]['progress'] > 0 ) {
+				$status = '-';
+			} else {
+				$status = get_string('ns','local_access_level_org_report');;
+			}
+
+		} else {
+			$status = get_string('cm','local_access_level_org_report'); 
+			$completiondate = userdate($ccompletion->timecompleted, $dateformat);
+		}
+		//print_object($ccompletion);
+		$grades = grade_get_course_grades($courseid, $newuserid);
+		//print_object($grades);
+		$grademax = $grades->grademax;
+		$grade1 = (int) $grades->grades[$newuserid]->str_grade;
+		//print_object($grades);
+	}	
+	$grade = array(
+		'status'=>$status,
+		'grade' => $grade1 ,
 		'completiondate' =>$completiondate
 		);
 	//print_object($grade);
@@ -203,15 +261,22 @@ function master_data($cohortid,$enrolid,$corseid,$orgid,$table){
 	$dateformat = '%d-%b-%Y';
 	$cohortname = cohort_name($cohortid);
 	$allusers = enrol_users($enrolid);
+	//print_object($allusers);
 	$orgname = org_name($orgid);
 	if($allusers){
 		foreach ($allusers as $key => $allusered) {
 			if(is_siteadmin()){
 				$alluser  = $DB->get_record('user',array('id'=>$allusered->userid));
 			}else{
-				$alluser  = $DB->get_record('user',array('id'=>$allusered->userid,'institution'=>$orgname->short_name));
+				$alluser  = $DB->get_record('user',array('id'=>$allusered->userid,'institution'=>$orgname->org_name));
+				//print_object($alluser);
 			}
 			if(!empty($alluser)){
+				if($alluser->lastaccess){
+					$last = userdate($alluser->lastaccess,$dateformat);
+				}else{
+					$last = '-';
+				}
 				$v = user_progress_course_report($corseid,$alluser->id);
 				$csname = get_course($corseid);
 				$cat = $DB->get_record('course_categories',array('id'=>$csname->category),'name');
@@ -231,9 +296,9 @@ function master_data($cohortid,$enrolid,$corseid,$orgid,$table){
 							$CFG->wwwroot.'/course/view.php?id='.$corseid,array()
 							),$csname->fullname
 						),						
-					userdate($alluser->lastaccess,$dateformat),
+					$last,
 					$v['completiondate'],
-					$v['percentage'],
+					$v['grade'],
 					$v['status']
 					);
 			}
