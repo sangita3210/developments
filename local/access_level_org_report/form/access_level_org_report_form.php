@@ -30,9 +30,9 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->libdir.'/formslib.php');
 
 class local_access_level_org_report_form extends moodleform {
-	function definition() {
-		global $CFG,$DB,$USER,$PAGE,$OUTPUT;
-		$mform =& $this->_form;	
+    function definition() {
+        global $CFG,$DB,$USER,$PAGE,$OUTPUT;
+        $mform =& $this->_form; 
         $customdata = $this->_customdata['csdata']; // this contains the data of this 
         $mform->addElement('header','accessinfohdr',get_string('accessinfohdr','local_access_level_org_report'));
         $mform->setExpanded('accessinfohdr');
@@ -40,12 +40,14 @@ class local_access_level_org_report_form extends moodleform {
         $sall = array('select-all'=>'Select All');
         //organization short name should display in select box here 
         if(!is_siteadmin()){
+            $selorg = array('none'=>'Please Select Organization');
             $sql1 = " SELECT lo.id,lo.org_name 
             from {local_organization} lo
             join {local_oragnization_admin} oa
             on oa.orgid = lo.id 
             where oa.userid = $USER->id";
-            $org = $DB->get_records_sql_menu($sql1);
+            $org1= $DB->get_records_sql_menu($sql1);
+            $org = ($selorg + $org1);
            } else{
             $org[0] = 'Please Select Organization';
             $orgde = $DB->get_records('local_organization',null,null,'id,org_name');
@@ -99,11 +101,11 @@ class local_access_level_org_report_form extends moodleform {
     $mform->addRule('cohort_id', get_string('required'), 'required', null, 'client');
     $select->setSelected('select-all');
     $select->setMultiple(true);
-		//select course 
+        //select course 
     $course1 = $DB->get_records_menu('course',null,null,'id,shortname');
     unset($course1[1]);
     $course = ($sall + $course1);
-		//changing code here
+        //changing code here
     if(isset($customdata['cohort_id']) && (!empty($customdata['cohort_id']))){
         foreach($customdata['cohort_id'] as $chid){
             if($chid !='select-all'){
