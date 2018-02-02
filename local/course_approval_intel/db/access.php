@@ -18,6 +18,7 @@
  * My profile block caps.
  *
  * @package    local_course_approval_intel
+ * @author      Prashant Yallatti
  * @copyright   Dhruv Infoline Pvt Ltd   
  * @license     http://lmsofindia.com  
  */
