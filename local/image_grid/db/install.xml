@@ -1,0 +1,24 @@
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="local/image_grid/db" VERSION="20170708" COMMENT="XMLDB file for Moodle local/image_grid" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="local_image_grid" COMMENT="image grid  settings">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+                <FIELD NAME="image1" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="image_link1" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                 <FIELD NAME="image2" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="image_link2" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                 <FIELD NAME="image3" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="image_link3" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                 <FIELD NAME="image4" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="image_link4" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                 <FIELD NAME="image5" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="image_link5" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                 <FIELD NAME="image6" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+                <FIELD NAME="image_link6" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+            </KEYS>
+        </TABLE>       
+    </TABLES>
+</XMLDB>
