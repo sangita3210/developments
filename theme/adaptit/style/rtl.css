@@ -1,0 +1,79 @@
+/* RTL Fixes */
+.dir-rtl .block .footer {
+  float: right;
+  text-align: right;
+}
+.dir-rtl .block_login input[type="submit"],
+.dir-rtl .block_login .footer a {
+  float: right;
+}
+.dir-rtl .block .header .title h2:before {
+  margin-left: 0.3em;
+}
+.dir-rtl .block #icon {
+  margin-left: 5px;
+}
+.dir-rlt .tree_item.branch:before {
+  margin-left: 5px;
+}
+.dir-rtl #page .block-region .block .header .title .block_action {
+  right: auto;
+  left: 15px;
+}
+.dir-rtl #page .block-region .block .header .title .block_action {
+  right: auto;
+  left: 15px;
+}
+.dir-rtl #page .block-region .block .content {
+  overflow: hidden;
+}
+.dir-rtl #page #region-main .coursebox > .info > .coursename a {
+  background-position: right 2px;
+}
+.dir-rtl #page .hidden-blocks .block-region .block {
+  float: right;
+}
+.dir-rtl .main-nav .nav li a.dropdown-toggle .caret:before {
+  margin-right: 2px;
+}
+.dir-rtl .main-nav .nav li a .fa {
+  margin-left: 5px;
+  margin-right: 0;
+}
+.dir-rtl #page-header h1.logo {
+  float: right;
+}
+.dir-rtl #page .breadcrumb-nav ul.breadcrumb li {
+  float: right;
+}
+.dir-rtl .comment-message .picture {
+  margin-right: 0;
+  margin-left: 5px;
+}
+.dir-rtl #page-content .userpicture,
+.dir-rtl .block_myprofile img.profilepicture {
+  margin-left: 5px;
+  margin-right: 0;
+}
+.dir-rtl.has_dock #page {
+  padding-right: 0;
+}
+.dir-rtl .flexslider ul.slides {
+  margin-right: 0;
+}
+.dir-rtl .main-nav .nav {
+  float: right;
+}
+.dir-rtl .main-nav .nav > li {
+  float: right;
+}
+.dir-rtl #topcontrol {
+  right: auto !important;
+  left: 5px !important;
+}
+.dir-rtl#page-site-index .testimonials .carousel-controls .prev {
+  float: left;
+}
+.dir-rtl#page-site-index .testimonials .carousel-controls .next {
+  float: right;
+}

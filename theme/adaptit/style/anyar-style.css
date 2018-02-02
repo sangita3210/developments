@@ -1,0 +1,260 @@
+/*
+    Theme Name: Anyar
+    Theme URL: https://bootstrapmade.com/anyar-free-multipurpose-one-page-bootstrap-theme/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+*/
+
+/* ==== Google font ==== */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
+@import url('font-awesome.css');
+/* ==== overwrite bootstrap standard ==== */
+
+
+/*===========================
+  About
+============================ */
+h4, .h4 {
+    font-size: 18px;
+    color: #000;
+}
+
+
+#about  {
+	margin-top:0px;
+	padding:50px;
+    background-color:#E8845E ; 
+}
+
+.center h2{
+  font-size: 25px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align:center;
+  color:#333;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+.lead {
+	text-align:center;
+	font-size:16px;
+	margin-bottom:50px;
+}
+
+/* --- progress --- */
+.progress {
+	height: 40px;
+}
+.progress-bar {
+  font-size: 14px;
+  line-height: 40px;
+}
+
+.panel-default{
+  border-color: transparent;
+}
+
+.panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 4px;
+    overflow: initial;
+}
+.panel-default>.panel-heading,
+.panel{
+  background-color: #e6e6e6; 
+  border:0 none;
+  box-shadow:none;
+}
+
+.panel-default>.panel-heading+.panel-collapse .panel-body{
+  background: #fff;
+  color: #000;
+}
+
+.panel-body{
+  padding: 20px 20px 10px;
+}
+
+.panel-group .panel+.panel{
+  margin-top: 20px;
+  border-top: 1px solid #fff;
+}
+
+.panel-group .panel{
+ border-radius:4px;
+}
+
+.panel-heading{
+	border-radius:4px;
+}
+
+.panel-title>a{
+  color: #4e4e4e;
+}
+
+.accordion-inner img{
+  border-radius: 4px;
+}
+
+
+.panel-heading.active{
+  background: #1f1f20;
+}
+
+.panel-heading.active .panel-title>a{
+  color:#fff;
+}
+
+a.accordion-toggle  i{
+  width: 40px;
+  line-height: 38px;
+  font-size: 20px;
+  margin-top: -10px;
+  text-align: center;
+  margin-right: -15px;
+  background: #d9ae6a;
+  color:#fff;
+  border-radius:4px;
+}
+
+.panel-heading.active a.accordion-toggle i{
+  background: #d9ae6a;
+  color: #fff;
+  border-radius:4px;
+}
+
+.panel-heading.active a.accordion-toggle.collapsed i{
+  background: #d9ae6a;
+  color: #fff;
+}
+.media-body h4 {
+font-size:18px;
+color:#000;
+}
+
+
+/*===========================
+  Services
+============================ */
+#services {
+	padding:40px;
+	background:#58BCDE;	
+}
+
+h3, .h3 {
+    font-size: 24px;
+    color: #fffdfd;
+}
+
+#services img {
+	padding-top:30px;
+	margin-bottom:30px;
+}
+
+#services h3 {
+	margin-bottom:30px;
+}
+
+#feature {
+	padding:80px;
+}
+
+#feature i {
+	font-size:40px;
+	margin-top:70px;
+	margin-bottom:30px;
+	color:#fff;
+	padding:50px;
+	background:#d9ae6a;
+	border-radius:50%;
+}
+
+#feature h3 {
+	margin-top:20px;
+	margin-bottom:20px;	
+	font-size:18px;
+	color: #333;
+}
+
+.hi-icon-effect i.fa:hover {
+	background:#fff;
+	color: #d9ae6a;
+	-webkit-transition: color 300ms, background-color 300ms;
+  -moz-transition: color 300ms, background-color 300ms;
+  -o-transition:  color 300ms, background-color 300ms;
+  transition:  color 300ms, background-color 300ms;
+}
+
+#contact {
+	background:#f6f6f6;
+	padding:100px;	
+}
+
+/* google map */
+#google-map{
+	position:relative;
+	margin-top:10px;
+    height: 530px;
+}
+
+#sendmessage {
+    
+}
+
+.validation {
+    color: red;
+    display:none;
+    margin: 0 0 20px;
+    font-weight:400;
+    font-size:13px;
+}
+
+#sendmessage {
+    color: green;
+    border:1px solid green;
+    display:none;
+    text-align:center;
+    padding:15px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+#errormessage {
+    color: red;
+    display:none;
+    border:1px solid red;
+    text-align:center;
+    padding:15px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+#sendmessage.show, #errormessage.show, .show {
+	display:block;
+}
+
+
+.form-group label {
+  color: #4E4E4E;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.form-group .form-control {
+  padding: 7px 12px;
+  border-color:#f2f2f2;
+  box-shadow: none;
+}
+
+textarea #message {
+  resize: none;
+  padding: 10px;
+}
+
+.center h3{
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align:center;
+}
+

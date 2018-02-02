@@ -1,0 +1,233 @@
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: 767px) {
+  body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .nav-collapse .nav {
+    width: 100%;
+    float: none;
+  }
+  .nav .open .dropdown-menu,
+  .nav .in .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .nav .open .dropdown-menu > li > a,
+  .nav .open .dropdown-menu .dropdown-header,
+  .nav .in .dropdown-menu > li > a,
+  .nav .in .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px;
+  }
+  .nav .open .dropdown-menu > li > a,
+  .nav .in .dropdown-menu > li > a {
+    line-height: 20px;
+  }
+  .nav .open .dropdown-menu > li > a:hover,
+  .nav .open .dropdown-menu > li > a:focus,
+  .nav .in .dropdown-menu > li > a:hover,
+  .nav .in .dropdown-menu > li > a:focus {
+    background-image: none;
+  }
+  .header .info {
+    margin-top: 15px;
+  }
+  .header .contact p {
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 5px;
+    float: none;
+  }
+  .header br {
+    display: none;
+  }
+  .header .social-icons {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .header .social-icons li {
+    float: none;
+    display: inline-block;
+  }
+  #page-header .header-widget p {
+    float: left;
+  }
+  .main-nav .nav-collapse {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-top: 0;
+    -webkit-box-shadow: 0;
+    -moz-box-shadow: 0;
+    box-shadow: 0;
+  }
+  .nav {
+    margin-top: 0;
+  }
+  #region-main table {
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+  }
+  .flexslider {
+    margin-bottom: 15px;
+  }
+  .flex-direction-nav a {
+    margin-top: -50px;
+  }
+  .flexslider .slides .flex-caption {
+    position: static;
+    display: block;
+  }
+  .flexslider .slides .flex-caption br {
+    display: none;
+  }
+  .flexslider .slides .flex-caption .main {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 0;
+  }
+  .flexslider .slides .flex-caption .secondary {
+    display: block;
+    font-size: 12px;
+  }
+  .flexslider .flex-control-nav {
+    display: none;
+  }
+  .loginbox .loginform .form-label {
+    float: none;
+    width: auto;
+    text-align: left;
+  }
+  .loginbox .loginform .form-input {
+    float: none;
+    width: auto;
+  }
+  #dockeditempanel .dockeditempanel_content {
+    width: 240px;
+  }
+  #page #region-main .loginbox {
+    padding: 5px;
+  }
+  #page-header h1.logo img {
+    max-width: 200px;
+  }
+  .section .label .contentwithoutlink,
+  .section .label .activityinstance {
+    padding-right: 0;
+  }
+  .editing .section .activity .contentwithoutlink,
+  .editing .section .activity .activityinstance {
+    padding-right: 60px;
+  }
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .main-nav .nav {
+    float: left;
+    margin: 0;
+  }
+  .main-nav .nav > li {
+    float: left;
+  }
+  .main-nav .nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .footer .bottom-bar .social li {
+    float: left;
+  }
+}
+@media (max-width: 979px) {
+  .nav-collapse .nav > li > a,
+  .nav-collapse .dropdown-menu a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    margin-bottom: 0;
+  }
+  .nav-collapse .dropdown-menu li + li a {
+    margin-bottom: 0;
+  }
+  .nav-collapse {
+    margin: 0 -15px;
+  }
+  .main-nav .nav {
+    float: none;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .main-nav .nav > li {
+    float: none;
+  }
+  .main-nav .nav .langmenu .dropdown-menu {
+    max-height: inherit;
+  }
+}
+/* Small Medium devices (desktops, 768px and 979px ) */
+@media (min-width: 768px) and (max-width: 979px) {
+  .collapse {
+    display: none;
+  }
+  .nav-collapse .nav > li > a,
+  .nav-collapse .dropdown-menu a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    margin-bottom: 0;
+  }
+  .navbar-header {
+    float: none;
+  }
+  .navbar-toggle {
+    display: inherit;
+    float: right;
+    margin-right: 0;
+  }
+}
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .footer .bottom-bar .social li {
+    float: right;
+  }
+  .pull-right {
+    float: right !important;
+  }
+  .pull-left {
+    float: left !important;
+  }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /* Moodle 2.6 */
+  .form-item .form-label,
+  .mform .fitem div.fitemtitle,
+  .userprofile dl.list dt,
+  .form-horizontal .control-label {
+    width: 180px;
+  }
+  /* Moodle 2.7 */
+  .form-item .form-setting,
+  .form-item .form-description,
+  .mform .fitem .felement,
+  #page-mod-forum-search .c1,
+  .mform .fdescription.required,
+  .userprofile dl.list dd,
+  .form-horizontal .controls {
+    margin-left: 200px;
+  }
+}
