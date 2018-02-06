@@ -1,0 +1,18 @@
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="local/invoicemail/db" VERSION="20150505" COMMENT="XMLDB file for Moodle local/invoicemail" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+
+    	 <TABLE NAME="local_invoicemail_trans_item" COMMENT="invoicemail transaction items">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="transaction_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="The invocemail Transaction id"/>
+                <FIELD NAME="product_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="The invoicemail Product id"/>
+                <FIELD NAME="variation_id" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="The invoicemailProductVariation id"/>
+                <FIELD NAME="item_cost" TYPE="float" LENGTH="10" NOTNULL="false" DECIMALS="2" SEQUENCE="false"  COMMENT="The cost of this item at time of transaction"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+
+    </TABLES>
+</XMLDB>    
