@@ -42,13 +42,12 @@ require_once $CFG->dirroot . '/local/buykart/lib.php';
 
 // payumoney does not like when we return error messages here,
 // the custom handler just logs exceptions and stops.
-set_exception_handler('enrol_buykart_ipn_exception_handler');
+//set_exception_handler('enrol_buykart_ipn_exception_handler');
 
 /// Keep out casual intruders
 if (empty($_POST) or !empty($_GET)) {
     print_error("Sorry, you can not use the script that way.");
 }
-
 /// Read all the data from payumoney and get it ready for later;
 /// we expect only valid UTF-8 encoding, it is the responsibility
 /// of user to set it up properly in payumoney business account,
@@ -64,7 +63,7 @@ $pfDone = false;
 $pfData = array();
 $pfParamString = '';
 global $CFG, $USER;
-require_once($CFG->dirroot.'/local/buykart/payment/paytm/lib/encdec_paytm.php'); // this is needed for the paytm checksum array
+require_once($CFG->dirroot.'/local/buykart/payment/paytm/lib/encdec_paytm-mcrypt.php'); // this is needed for the paytm checksum array
 $checksum = '';
 $merchant_id = get_config('local_buykart', 'payment_paytm_merchant_mid');
 $merchant_key = get_config('local_buykart', 'payment_paytm_merchant_key');
@@ -105,3 +104,4 @@ if($isValidChecksum == "1" || $isValidChecksum == "TRUE") {
 			redirect(new moodle_url($CFG->wwwroot.'/'),'');
 		}
 	exit;
+}
