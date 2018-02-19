@@ -1,48 +1,21 @@
 <?php
-
-function encrypt_e($input, $ky) {
-
-	$key = $ky;
-	$size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, 'cbc');
-	$input = pkcs5_pad_e($input, $size);
-	$td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', 'cbc', '');
+//check
+function encrypt_e_openssl($input, $ky) {
 	$iv = "@@@@&&&&####$$$$";
-	mcrypt_generic_init($td, $key, $iv);
-	$data = mcrypt_generic($td, $input);
-	mcrypt_generic_deinit($td);
-	mcrypt_module_close($td);
-	$data = base64_encode($data);
-	return $data;
+    $data = openssl_encrypt($input, "AES-128-CBC", $ky, 0, $iv);
+    return $data;
+}
+//check
+function decrypt_e_openssl($crypt, $ky) {
+	//new code here 
+	$iv   = "@@@@&&&&####$$$$";
+    $decrypted_data = openssl_decrypt($crypt, "AES-128-CBC", $ky, 0, $iv);
+    return $decrypted_data;
 }
 
-function decrypt_e($crypt, $ky) {
-
-	$crypt = base64_decode($crypt);
-	$key = $ky;
-	$td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', 'cbc', '');
-	$iv = "@@@@&&&&####$$$$";
-	mcrypt_generic_init($td, $key, $iv);
-	$decrypted_data = mdecrypt_generic($td, $crypt);
-	mcrypt_generic_deinit($td);
-	mcrypt_module_close($td);
-	$decrypted_data = pkcs5_unpad_e($decrypted_data);
-	$decrypted_data = rtrim($decrypted_data);
-	return $decrypted_data;
-}
-
-function pkcs5_pad_e($text, $blocksize) {
-	$pad = $blocksize - (strlen($text) % $blocksize);
-	return $text . str_repeat(chr($pad), $pad);
-}
-
-function pkcs5_unpad_e($text) {
-	$pad = ord($text{strlen($text) - 1});
-	if ($pad > strlen($text))
-		return false;
-	return substr($text, 0, -1 * $pad);
-}
-
+//check
 function generateSalt_e($length) {
+	//no changes here 
 	$random = "";
 	srand((double) microtime() * 1000000);
 
@@ -56,14 +29,16 @@ function generateSalt_e($length) {
 
 	return $random;
 }
-
+//check
 function checkString_e($value) {
+	//no changes here 
 	if ($value == 'null')
 		$value = '';
 	return $value;
 }
-
+//check
 function getChecksumFromArray($arrayList, $key, $sort=1) {
+	//no changes here
 	if ($sort != 0) {
 		ksort($arrayList);
 	}
@@ -72,59 +47,57 @@ function getChecksumFromArray($arrayList, $key, $sort=1) {
 	$finalString = $str . "|" . $salt;
 	$hash = hash("sha256", $finalString);
 	$hashString = $hash . $salt;
-	$checksum = encrypt_e($hashString, $key);
+	$checksum = encrypt_e_openssl($hashString, $key);
 	return $checksum;
 }
+//check
 function getChecksumFromString($str, $key) {
-	
+	//no changes 
 	$salt = generateSalt_e(4);
 	$finalString = $str . "|" . $salt;
 	$hash = hash("sha256", $finalString);
 	$hashString = $hash . $salt;
-	$checksum = encrypt_e($hashString, $key);
+	$checksum = encrypt_e_openssl($hashString, $key);
 	return $checksum;
 }
-
+//check
 function verifychecksum_e($arrayList, $key, $checksumvalue) {
-	$arrayList = removeCheckSumParam($arrayList);
-	ksort($arrayList);
-	$str = getArray2Str($arrayList);
-	$paytm_hash = decrypt_e($checksumvalue, $key);
-	$salt = substr($paytm_hash, -4);
-
-	$finalString = $str . "|" . $salt;
-
-	$website_hash = hash("sha256", $finalString);
-	$website_hash .= $salt;
-
-	$validFlag = "FALSE";
-	if ($website_hash == $paytm_hash) {
-		$validFlag = "TRUE";
-	} else {
-		$validFlag = "FALSE";
-	}
-	return $validFlag;
+	//no changes can be done
+    $arrayList = removeCheckSumParam($arrayList);
+    ksort($arrayList);
+    $str          = getArray2Str($arrayList);
+    $paytm_hash   = decrypt_e_openssl($checksumvalue, $key);
+    $salt         = substr($paytm_hash, -4);
+    $finalString  = $str . "|" . $salt;
+    $website_hash = hash("sha256", $finalString);
+    $website_hash .= $salt;
+    $validFlag = "FALSE";
+    if ($website_hash == $paytm_hash) {
+        $validFlag = "TRUE";
+    } else {
+        $validFlag = "FALSE";
+    }
+    return $validFlag;
 }
-
+//check
 function verifychecksum_eFromStr($str, $key, $checksumvalue) {
-	$paytm_hash = decrypt_e($checksumvalue, $key);
-	$salt = substr($paytm_hash, -4);
-
-	$finalString = $str . "|" . $salt;
-
-	$website_hash = hash("sha256", $finalString);
-	$website_hash .= $salt;
-
-	$validFlag = "FALSE";
-	if ($website_hash == $paytm_hash) {
-		$validFlag = "TRUE";
-	} else {
-		$validFlag = "FALSE";
-	}
-	return $validFlag;
+	//no changes only one functin name is modified
+	$paytm_hash   = decrypt_e_openssl($checksumvalue, $key);
+    $salt         = substr($paytm_hash, -4);
+    $finalString  = $str . "|" . $salt;
+    $website_hash = hash("sha256", $finalString);
+    $website_hash .= $salt;
+    $validFlag = "FALSE";
+    if ($website_hash == $paytm_hash) {
+        $validFlag = "TRUE";
+    } else {
+        $validFlag = "FALSE";
+    }
+    return $validFlag;
 }
-
+//check
 function getArray2Str($arrayList) {
+	//no changes can be done in this function here
 	$findme   = 'REFUND';
 	$findmepipe = '|';
 	$paramStr = "";
@@ -146,33 +119,34 @@ function getArray2Str($arrayList) {
 	}
 	return $paramStr;
 }
-
+//check
 function redirect2PG($paramList, $key) {
+	//function name is changed.
 	$hashString = getchecksumFromArray($paramList);
-	$checksum = encrypt_e($hashString, $key);
+    $checksum   = encrypt_e_openssl($hashString, $key);
 }
-
+//check
 function removeCheckSumParam($arrayList) {
+//no chaanges
 	if (isset($arrayList["CHECKSUMHASH"])) {
 		unset($arrayList["CHECKSUMHASH"]);
 	}
 	return $arrayList;
-}
 
+}
+//check
 function getTxnStatus($requestParamList) {
+	//no changes
 	return callAPI(PAYTM_STATUS_QUERY_URL, $requestParamList);
 }
-
-function getTxnStatusNew($requestParamList) {
-	return callNewAPI(PAYTM_STATUS_QUERY_NEW_URL, $requestParamList);
-}
-
+//check
 function initiateTxnRefund($requestParamList) {
+	//no changes here
 	$CHECKSUM = getRefundChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY,0);
 	$requestParamList["CHECKSUM"] = $CHECKSUM;
 	return callAPI(PAYTM_REFUND_URL, $requestParamList);
 }
-
+//check
 function callAPI($apiURL, $requestParamList) {
 	$jsonResponse = "";
 	$responseParamList = array();
@@ -193,73 +167,3 @@ function callAPI($apiURL, $requestParamList) {
 	return $responseParamList;
 }
 
-function callNewAPI($apiURL, $requestParamList) {
-	$jsonResponse = "";
-	$responseParamList = array();
-	$JsonData =json_encode($requestParamList);
-	$postData = 'JsonData='.urlencode($JsonData);
-	$ch = curl_init($apiURL);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);                                                                  
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-	curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                         
-	'Content-Type: application/json', 
-	'Content-Length: ' . strlen($postData))                                                                       
-	);  
-	$jsonResponse = curl_exec($ch);   
-	$responseParamList = json_decode($jsonResponse,true);
-	return $responseParamList;
-}
-function getRefundChecksumFromArray($arrayList, $key, $sort=1) {
-	if ($sort != 0) {
-		ksort($arrayList);
-	}
-	$str = getRefundArray2Str($arrayList);
-	$salt = generateSalt_e(4);
-	$finalString = $str . "|" . $salt;
-	$hash = hash("sha256", $finalString);
-	$hashString = $hash . $salt;
-	$checksum = encrypt_e($hashString, $key);
-	return $checksum;
-}
-function getRefundArray2Str($arrayList) {	
-	$findmepipe = '|';
-	$paramStr = "";
-	$flag = 1;	
-	foreach ($arrayList as $key => $value) {		
-		$pospipe = strpos($value, $findmepipe);
-		if ($pospipe !== false) 
-		{
-			continue;
-		}
-		
-		if ($flag) {
-			$paramStr .= checkString_e($value);
-			$flag = 0;
-		} else {
-			$paramStr .= "|" . checkString_e($value);
-		}
-	}
-	return $paramStr;
-}
-function callRefundAPI($refundApiURL, $requestParamList) {
-	$jsonResponse = "";
-	$responseParamList = array();
-	$JsonData =json_encode($requestParamList);
-	$postData = 'JsonData='.urlencode($JsonData);
-	$ch = curl_init($apiURL);	
-	curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	curl_setopt($ch, CURLOPT_URL, $refundApiURL);
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);  
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-	$headers = array();
-	$headers[] = 'Content-Type: application/json';
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);  
-	$jsonResponse = curl_exec($ch);   
-	$responseParamList = json_decode($jsonResponse,true);
-	return $responseParamList;
-}
