@@ -21,6 +21,7 @@ define('BUYKART_GATEWAY_PAYUMONEY', 'BUYKART_GATEWAY_PAYUMONEY');
 define('BUYKART_GATEWAY_EBS', 'BUYKART_GATEWAY_EBS');
 define('BUYKART_GATEWAY_PAYTM', 'BUYKART_GATEWAY_PAYTM');
 define('BUYKART_GATEWAY_INSTAMOJO', 'BUYKART_GATEWAY_INSTAMOJO');
+define('BUYKART_GATEWAY_STRIPE', 'BUYKART_GATEWAY_STRIPE');
 
 
 
@@ -38,6 +39,7 @@ require_once $CFG->dirroot . '/local/buykart/classes/gateway_payumoney.php';
 require_once $CFG->dirroot . '/local/buykart/classes/gateway_ebs.php';
 require_once $CFG->dirroot . '/local/buykart/classes/gateway_paytm.php';
 require_once $CFG->dirroot . '/local/buykart/classes/gateway_instamojo.php';
+require_once $CFG->dirroot . '/local/buykart/classes/gateway_stripe.php';
 
 
 /**
