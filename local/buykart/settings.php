@@ -1004,5 +1004,100 @@ if ($hassiteconfig) {
 				0
 			)
 		);
+			//stripe payment getway settings added by prashant 
+		//Stripe setting 
+	$settings = new admin_settingpage(
+		'local_buykart_settings_stripe',
+		get_string(
+			'payment_stripe_title',
+			'local_buykart'
+			)
+		);
+	$ADMIN->add('buykart_payment', $settings);
+
+		// 
+		// Add stripe enable checkbox
+		// 
+	$settings->add(
+		new admin_setting_configcheckbox(
+			'local_buykart/payment_stripe_enable',
+			get_string(
+				'payment_enable',
+				'local_buykart'
+				),
+			get_string(
+				'payment_enable_desc',
+				'local_buykart'
+				),
+			0
+			)
+		);
+	$paypalcurrencies = local_buykart_get_currencies();
+	$settings->add(
+		new admin_setting_configselect(
+			'local_buykart/payment_stripe_currency',
+			get_string(
+				'currency',
+				'local_buykart'
+				),
+			get_string(
+				'currency_desc',
+				'local_buykart'
+				),
+			'USD',
+			$paypalcurrencies
+			)
+		);
+
+		// Add stripe secret key setting
+		// 
+	$settings->add(
+		new admin_setting_configtext(
+			'local_buykart/payment_stripe_secret_key',
+			get_string(
+				'payment_stripe_secret_key',
+				'local_buykart'
+				),
+			get_string(
+				'payment_stripe_secret_key_desc',
+				'local_buykart'
+				),
+			'',
+			PARAM_TEXT
+			)
+		);
+
+		// 
+		// stripe secret publishableKey key setting
+
+	$description = get_string('sandbox', 'local_buykart');
+	$settings->add(
+		new admin_setting_configtext(
+			'local_buykart/payment_stripe_publishableKey',
+			get_string(
+				'payment_stripe_publishableKey',
+				'local_buykart'
+				),
+			get_string(
+				'payment_stripe_publishableKey_desc',
+				'local_buykart'
+				),
+			PARAM_TEXT
+			)
+		);
+	$settings->add(
+		new admin_setting_heading(
+			'local_buykart/payment_stripe_heading',
+			get_string(
+				'note',
+				'local_buykart'
+				),
+			$description,
+			PARAM_TEXT
+
+
+			)
+		);
+
 
 }
