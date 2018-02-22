@@ -914,28 +914,54 @@ class local_buykart_renderer extends plugin_renderer_base {
 
 			// Render all active Gateway options
 			
+		//for button new renderer code is added by prashant 
+			$html .= '<br><br>';
+			$html .= '<hr>';
+			$html .= '<div class="col-md-12">';
+			$html .= '<div class="col-md-2">';
 			if( !!get_config('local_buykart', 'payment_paypal_enable') ){
 				$gatewayPaypal = new BuykartGatewayPaypal($cart->get_transaction_id());
 				$html .= $gatewayPaypal->render();
 			}
+			$html .= '</div>';
+			$html .= '<div class="col-md-2">';
 			if( !!get_config('local_buykart', 'payment_payumoney_enable') ){
 				$gatewayPayumoney = new BuykartGatewayPayumoney($cart->get_transaction_id());
 				$html .= $gatewayPayumoney->render();
 			}
+			$html .= '</div>';
+
+			$html .= '<div class="col-md-2">';
 			if( !!get_config('local_buykart', 'payment_ebs_enable') ){
 				$gatewayEbs = new BuykartGatewayEbs($cart->get_transaction_id());
 				$html .= $gatewayEbs->render();
 			}
-			//paytm getway is adding here button is added here  Prashant
+			$html .= '</div>';
+
+			$html .= '<div class="col-md-2">';
+			//paytm getway button is added by Prashant
 			if( !!get_config('local_buykart', 'payment_paytm_enable') ){
 				$gatewayPaytm = new BuykartGatewayPaytm($cart->get_transaction_id());
 				$html .= $gatewayPaytm->render();
 			}
+			$html .= '</div>';
+
 			//instamojo getway is adding here button is added here
+			$html .= '<div class="col-md-2">';
 			if( !!get_config('local_buykart', 'payment_instamojo_enable') ){
 				$gatewayInstamojo = new BuykartGatewayInstamojo($cart->get_transaction_id());
 				$html .= $gatewayInstamojo->render();
 			} 
+			$html .= '</div>';
+
+			//stripe getway  button is added by Prashant
+			$html .= '<div class="col-md-2">';
+			if( !!get_config('local_buykart', 'payment_stripe_enable') ){
+				$gatewayStripe = new BuykartGatewayStripe($cart->get_transaction_id());
+				$html .= $gatewayStripe->render();
+			}
+			$html .= '</div>';
+			$html .= '</div>'; 
 			
 
 		} else {
