@@ -303,3 +303,16 @@ $string['payumoneypending'] = 'Your Payumoney payment is pending.';
 $string['paytm'] = 'Moodle: Paytm payment';
 $string['paytmpending'] = 'Your Paytm payment is pending.';
 $string['paymentmethod'] = 'Payment Method';
+
+//prashant is updating lang file for stripe payment  
+$string['payment_stripe_title'] = 'Stripe';
+$string['payment_stripe_secret_key'] = 'Stripe secret key';
+$string['payment_stripe_secret_key_desc'] = 'Enter stripe secret key';
+$string['payment_stripe_publishableKey'] = 'Stripe publishablekey';
+$string['payment_stripe_publishableKey_desc'] = 'Enter stripe publishable key';
+$string['stripe'] = 'Moodle: stripe payment';
+$string['stripepending'] = 'Your stripe payment is pending.';
+$string['button_stripe_label'] = 'Pay with Stripe';
+$string['note'] = 'Note:';
+$string['sandbox'] = 'In Stripe Payment Gatway there in no sandbox url provided insted of that we need to use test secret key and test publishableKey';
+$string['currency_desc'] ='Slect only us dollar';
