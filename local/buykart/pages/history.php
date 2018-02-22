@@ -87,6 +87,9 @@ if(!isset($transid)){
 			}else if ($tvalue->gateway == 'BUYKART_GATEWAY_PAYTM') {
 				$tvalue->type = 'PAYTM';
 			}
+			else if ($tvalue->gateway == 'BUYKART_GATEWAY_STRIPE') {
+				$tvalue->type = 'STRIPE';
+			}
 			
 			$table->data[] = array(
 						$i,
