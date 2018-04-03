@@ -31,7 +31,7 @@ $capadmin = is_siteadmin();
 $context = context_system::instance();
 //$createorgcap = has_capability('local/accesscohort:addorganization',$context);
 $PAGE->set_context(context_system::instance());
-$title = get_string('accessinfohdr', 'local_access_level_org_report');
+$title = get_string('access_report', 'local_access_level_org_report');
 $PAGE->set_title($title);
 $PAGE->set_heading($title);
 $PAGE->set_pagelayout('admin');

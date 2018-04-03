@@ -29,4 +29,4 @@ $plugin->version   = 2017012001;
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->requires  = 2011120501;
 $plugin->component = 'local_access_level_org_report';
-$plugin->dependencies = array('accesscohort' => 2017011024);
+$plugin->dependencies = array('local_accesscohort' => 2017011024);

@@ -41,10 +41,15 @@ function local_access_level_org_report_extend_navigation(global_navigation $nav)
 	$allreport = has_capability('local/access_level_org_report:allreport',$systemcontext);
 	$nav->showinflatnavigation = true;
 	if($myreport ||$allreport) {
-		$abc = $nav->add(get_string('pluginname','local_access_level_org_report'),
+		$abc = $nav->add(get_string('access_report','local_access_level_org_report'),
 			$CFG->wwwroot.'/local/access_level_org_report/access_level_org_report.php'); 
 		$abc->showinflatnavigation = true;
 	}
+	
+	//own user level report link for all 15-Feb-2018
+	$xyz = $nav->add(get_string('accessinfohdrmyown','local_access_level_org_report'),
+			$CFG->wwwroot.'/local/access_level_org_report/access_level_user_report.php'); 
+		$xyz->showinflatnavigation = true;
 }
 /**
  * Returns the user progress report of  status,percentage,completiondate
@@ -268,7 +273,7 @@ function master_data($cohortid,$enrolid,$corseid,$orgid,$table){
 			if(is_siteadmin()){
 				$alluser  = $DB->get_record('user',array('id'=>$allusered->userid));
 			}else{
-				$alluser  = $DB->get_record('user',array('id'=>$allusered->userid,'institution'=>$orgname->org_name));
+				$alluser  = $DB->get_record('user',array('id'=>$allusered->userid,'institution'=>$orgname->org_name)); //16Jan 2018 changes
 				//print_object($alluser);
 			}
 			if(!empty($alluser)){
@@ -286,7 +291,13 @@ function master_data($cohortid,$enrolid,$corseid,$orgid,$table){
 							$CFG->wwwroot.'/user/profile.php?id='.$alluser->id,array()
 							),$alluser->username
 						), 
-					$alluser->firstname.' '.$alluser->lastname,
+					//$alluser->firstname.' '.$alluser->lastname,
+					//for new requiremnt in fullname column link is added by prashant feb 14-2-18  
+					html_writer::link(
+						new moodle_url(
+							$CFG->wwwroot.'/local/access_level_org_report/access_level_user_report.php?id='.$alluser->id,array()
+							),$alluser->firstname.' '.$alluser->lastname
+					),
 					$alluser->email,
 					$orgname->org_name,
 					$cohortname->name,
@@ -308,3 +319,55 @@ function master_data($cohortid,$enrolid,$corseid,$orgid,$table){
 }
 
 
+//new function added on 15-feb-2018 for user level report
+//course name function here 
+
+function course_name($courseid){
+	global $CFG,$DB,$USER;
+	$coursename = $DB->get_record('course',array('id'=>$courseid),'id,fullname');
+	if($coursename){
+		return $coursename;
+	}
+}
+
+//category name 
+
+function category_name($cid){
+	global $CFG,$DB,$USER;
+	$catname = $DB->get_record('course_categories',array('id'=>$cid),'id,name');
+	if($catname){
+		return $catname;
+	}
+}
+//last access course code here 
+
+function last_access_course($userid,$courseid){
+	global $CFG,$DB,$USER;
+	$sc1 = "SELECT id,timecreated FROM {logstore_standard_log} WHERE target = 'course' and  userid = $userid and courseid = $courseid ORDER by timecreated DESC limit 1,1";
+	$result = $DB->get_record_sql($sc1);
+	return $result;
+}
+
+function course_complete($userid,$course){
+	$info = new completion_info($course);
+	$completion = $info->is_course_complete($userid);
+	if($completion){
+		return $completion;
+	}
+}
+
+function number_of_visited_course($userid,$courseid){
+	global $CFG,$DB,$USER;
+	//$sc1 = "SELECT count(*) from {logstore_standard_log} where  eventname ='\core\event\course_category_viewed' and userid = $userid  and courseid = $courseid";
+	$sc1 = $DB->count_records('logstore_standard_log', array ('eventname'=>'\core\event\course_viewed','userid'=>$userid,'courseid'=>$courseid)); 
+	return $sc1;
+}
+//username and email 
+
+function userinfo($userid){
+	global $CFG,$DB,$USER;
+	$uname = $DB->get_record('user',array('id'=>$userid),'id,firstname,lastname,email');
+	if($uname){
+		return $uname;
+	}
+}
